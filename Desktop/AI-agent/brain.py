@@ -13,7 +13,8 @@ class NvidiaBrain:
             api_key=self.api_key
         )
     def get_decision(self, system_prompt, user_content):
-        response = self.client.chat.completions.create(
+        try:
+            response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -21,4 +22,6 @@ class NvidiaBrain:
             ],
             temperature=0.2
         )
-        return response.choices[0].message.content
+            return response.choices[0].message.content
+        except Exception as e:
+            return f"Error: {str(e)}"
