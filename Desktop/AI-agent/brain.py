@@ -12,3 +12,13 @@ class NvidiaBrain:
             base_url=self.base_url,
             api_key=self.api_key
         )
+    def get_decision(self, system_prompt, user_content):
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_content}
+            ],
+            temperature=0.2
+        )
+        return response.choices[0].message.content
