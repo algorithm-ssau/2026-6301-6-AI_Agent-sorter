@@ -1,27 +1,39 @@
 import os
-from openai import OpenAI
+import google.generativeai as genai
 from dotenv import load_dotenv
 
-class NvidiaBrain:
+class GeminiBrain:
+    """Класс для работы напрямую с Google Gemini API."""
+
     def __init__(self):
         load_dotenv()
-        self.api_key = os.getenv("NVIDIA_API_KEY")
-        self.base_url = os.getenv("NVIDIA_BASE_URL")
-        self.model = os.getenv("MODEL_NAME")
-        self.client = OpenAI(
-            base_url=self.base_url,
-            api_key=self.api_key
-        )
-    def get_decision(self, system_prompt, user_content):
+        # Берем ключ из .env
+        api_key = os.getenv("GEMINI_API_KEY")
+        
+        if not api_key:
+            print("[!] Ошибка: GEMINI_API_KEY не найден в .env")
+            return
+
+        # Твой код конфигурации
+        genai.configure(api_key=api_key)
+        
+        # Твоя модель
+        self.model_name = os.getenv("MODEL_NAME", "gemini-2.0-flash")
+        self.model = genai.GenerativeModel(self.model_name)
+        print(f"[Brain] Интеллект Gemini запущен на модели: {self.model_name}")
+
+    def get_decision(self, system_prompt: str, file_content: str) -> str:
+        """Отправляет запрос и возвращает категорию."""
         try:
-            response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_content}
-            ],
-            temperature=0.2
-        )
-            return response.choices[0].message.content
+            # Формируем запрос как в твоем примере
+            full_query = f"{system_prompt}\n\nТекст для классификации:\n{file_content}"
+            
+            response = self.model.generate_content(full_query)
+            
+            if response and response.text:
+                return response.text.strip()
+            return "Unsorted"
+            
         except Exception as e:
-            return f"Error: {str(e)}"
+            print(f"[!] Ошибка Gemini: {e}")
+            return "Unsorted"
