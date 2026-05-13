@@ -8,3 +8,7 @@ class NvidiaBrain:
         self.api_key = os.getenv("NVIDIA_API_KEY")
         self.base_url = os.getenv("NVIDIA_BASE_URL")
         self.model = os.getenv("MODEL_NAME")
+        self.client = OpenAI(
+            base_url=self.base_url,
+            api_key=self.api_key
+        )
