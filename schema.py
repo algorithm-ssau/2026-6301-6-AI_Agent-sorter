@@ -49,3 +49,6 @@ class AgentPrompts:
         """Очищает ответ ИИ от лишних знаков препинания и пробелов."""
         # Убираем точки, кавычки и лишние пробелы, если ИИ их добавил
         return raw_response.replace(".", "").replace("\"", "").strip()
+
+
+AgentPrompts.SYSTEM_INSTRUCTION = AgentPrompts.get_system_instruction()
