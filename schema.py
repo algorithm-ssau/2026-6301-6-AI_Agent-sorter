@@ -1,6 +1,9 @@
 class AgentPrompts:
     """Хранилище инструкций для ИИ-агента."""
 
+    ALLOWED_CATEGORIES = ("Work", "Study", "Personal", "Finance")
+    UNKNOWN_CATEGORY = "Unsorted"
+
     # Главная инструкция для нейросети
     SYSTEM_INSTRUCTION = """
     Ты — эксперт по организации данных и персональный ассистент. 
