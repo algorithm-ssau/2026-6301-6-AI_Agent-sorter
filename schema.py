@@ -10,6 +10,14 @@ class AgentPrompts:
         "Finance": "крипто-трейдинг, инвестиции, бюджеты.",
     }
 
+    @classmethod
+    def _format_categories(cls) -> str:
+        lines = []
+        for category in cls.ALLOWED_CATEGORIES:
+            description = cls.CATEGORY_DESCRIPTIONS.get(category, "")
+            lines.append(f"- {category}: {description}")
+        return "\n".join(lines)
+
     # Главная инструкция для нейросети
     SYSTEM_INSTRUCTION = """
     Ты — эксперт по организации данных и персональный ассистент. 
