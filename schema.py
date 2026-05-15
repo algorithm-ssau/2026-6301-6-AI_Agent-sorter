@@ -3,6 +3,12 @@ class AgentPrompts:
 
     ALLOWED_CATEGORIES = ("Work", "Study", "Personal", "Finance")
     UNKNOWN_CATEGORY = "Unsorted"
+    CATEGORY_DESCRIPTIONS = {
+        "Work": "задачи, отчеты, деловая переписка, банкинг, проекты.",
+        "Study": "университет, лекции, программирование, учебные заметки.",
+        "Personal": "фитнес, хобби, рецепты, личные планы, покупки.",
+        "Finance": "крипто-трейдинг, инвестиции, бюджеты.",
+    }
 
     # Главная инструкция для нейросети
     SYSTEM_INSTRUCTION = """
