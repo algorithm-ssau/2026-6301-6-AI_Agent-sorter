@@ -44,6 +44,10 @@ class AgentPrompts:
             "Не пиши никаких пояснений."
         )
 
+    @classmethod
+    def is_supported_category(cls, category: str) -> bool:
+        return category in cls.ALLOWED_CATEGORIES
+
     @staticmethod
     def clean_category(raw_response: str) -> str:
         """Очищает ответ ИИ от лишних знаков препинания и пробелов."""
