@@ -25,3 +25,18 @@ class IOHandler:
         except Exception as e:
             print(f"[!] Ошибка чтения {file_path.name}: {e}")
             return ""
+
+    def move_to_category(self, file_path: Path, category: str):
+        """Перемещает файл в папку с названием категории."""
+        # Очищаем название категории от лишних символов
+        clean_category = category.strip().capitalize()
+        target_path = self.output_dir / clean_category
+        
+        target_path.mkdir(exist_ok=True)
+        
+        try:
+            shutil.move(str(file_path), str(target_path / file_path.name))
+            print(f"[✓] Файл {file_path.name} отправлен в папку: {clean_category}")
+        except Exception as e:
+            print(f"[X] Не удалось переместить {file_path.name}: {e}")
+
