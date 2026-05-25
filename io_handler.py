@@ -15,3 +15,13 @@ class IOHandler:
     def list_files(self):
         """Находит все текстовые файлы в папке input."""
         return [f for f in self.input_dir.iterdir() if f.is_file() and f.suffix in ['.txt', '.md']]
+
+    def read_content(self, file_path: Path) -> str:
+        """Читает содержимое файла. Возвращает пустую строку при ошибке."""
+        try:
+            # Читаем первые 2000 символов, чтобы не перегружать контекст ИИ
+            content = file_path.read_text(encoding='utf-8')
+            return content[:2000] 
+        except Exception as e:
+            print(f"[!] Ошибка чтения {file_path.name}: {e}")
+            return ""
