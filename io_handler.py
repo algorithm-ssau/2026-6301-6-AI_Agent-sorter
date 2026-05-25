@@ -1,6 +1,5 @@
-import os
-import shutil
-from pathlib import Path
+import os import shutil from pathlib import Path
+
 
 class IOHandler:
     """Класс для управления файловыми операциями: чтение, поиск и сортировка."""
@@ -13,3 +12,6 @@ class IOHandler:
         self.input_dir.mkdir(parents=True, exist_ok=True)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
+    def list_files(self):
+        """Находит все текстовые файлы в папке input."""
+        return [f for f in self.input_dir.iterdir() if f.is_file() and f.suffix in ['.txt', '.md']]
