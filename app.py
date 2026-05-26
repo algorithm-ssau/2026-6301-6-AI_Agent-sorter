@@ -29,3 +29,6 @@ def run_agent():
             content = handler.read_content(file_path)
             if not content:
                 continue
+
+            raw_decision = brain.get_decision(prompts.SYSTEM_INSTRUCTION, content)
+            category = prompts.clean_category(raw_decision)
