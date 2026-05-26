@@ -32,3 +32,7 @@ def run_agent():
 
             raw_decision = brain.get_decision(prompts.SYSTEM_INSTRUCTION, content)
             category = prompts.clean_category(raw_decision)
+            handler.move_to_category(file_path, category)
+
+        print("--- Цикл завершен ---")
+        time.sleep(1)
