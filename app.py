@@ -14,3 +14,11 @@ def run_agent():
     prompts = AgentPrompts()
 
     print("--- ИИ-Агент запущен и готов к сортировке ---")
+
+    while True:
+        files_to_process = handler.list_files()
+
+        if not files_to_process:
+            print("[...] Новых файлов нет. Жду 10 секунд...")
+            time.sleep(10)
+            continue
