@@ -36,3 +36,7 @@ def run_agent():
 
         print("--- Цикл завершен ---")
         time.sleep(1)
+
+
+if __name__ == "__main__":
+    run_agent()
