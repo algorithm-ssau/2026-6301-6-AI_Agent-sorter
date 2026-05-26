@@ -39,4 +39,7 @@ def run_agent():
 
 
 if __name__ == "__main__":
-    run_agent()
+    try:
+        run_agent()
+    except KeyboardInterrupt:
+        print("\n[!] Агент остановлен пользователем.")
