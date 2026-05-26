@@ -22,3 +22,10 @@ def run_agent():
             print("[...] Новых файлов нет. Жду 10 секунд...")
             time.sleep(10)
             continue
+
+        for file_path in files_to_process:
+            print(f"[*] Обрабатываю: {file_path.name}")
+
+            content = handler.read_content(file_path)
+            if not content:
+                continue
